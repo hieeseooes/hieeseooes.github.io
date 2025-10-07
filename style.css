@@ -1,0 +1,39 @@
+body {
+  font-family: system-ui, sans-serif;
+  color: #222;
+  background: #f9fafc;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+header {
+  padding: 3rem 1rem;
+  background: linear-gradient(120deg, #7b2ff7, #f107a3);
+  color: white;
+}
+.logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+section {
+  margin: 2rem auto;
+  max-width: 600px;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #7b2ff7;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.btn:hover {
+  background: #f107a3;
+}
+footer {
+  padding: 1rem;
+  background: #111;
+  color: #aaa;
+}
