@@ -49,7 +49,7 @@
 
         for (let ch of lines[i]) {
           lineEl.textContent += ch;
-          await sleep(50);
+          await sleep(35);
         }
         await sleep(300);
       }
@@ -81,7 +81,7 @@
       finalLine.textContent = "done — patch applied.";
       termContainer.appendChild(finalLine);
       cursorEl.style.opacity = "0";
-    }, 2000);
+    }, 3000);
 
     // set year
     document.getElementById("cur-year").textContent = new Date().getFullYear();
