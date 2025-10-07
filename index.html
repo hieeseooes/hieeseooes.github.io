@@ -1,24 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hieeseooes Automator Verification</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hieeseooes Automator — Verification</title>
+  <meta name="description" content="Verification page for Hieeseooes Automator.">
   <link rel="stylesheet" href="style.css">
-  <meta name="description" content="Automation verification page by Hieeseooes Automator.">
 </head>
 <body>
-  <main id="container">
-    <h1>⚙️ Verifying Ownership...</h1>
-    <p id="status">Please wait a moment</p>
-  </main>
+  <div class="wrap">
+    <header class="hero">
+      <div class="brand">
+        <div class="badge">HIEESEOOES</div>
+        <h1>AUTOMATOR</h1>
+      </div>
+      <p class="tag">automation • verification • sale</p>
+    </header>
+
+    <main id="container" aria-live="polite">
+      <section class="card terminal">
+        <div class="term-window">
+          <div class="term-lines" id="term"></div>
+          <div class="cursor" id="cursor">▌</div>
+        </div>
+      </section>
+
+      <section class="card status">
+        <h2 id="status-title">Verifying browser...</h2>
+        <p id="status-sub">This page will change a verification flag for automated checks.</p>
+        <div class="links">
+          <a href="https://github.com/hieeseooes" target="_blank" rel="noopener">Github</a>
+          <a href="https://www.facebook.com/nanang00m" target="_blank" rel="noopener">Facebook</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small>© <span id="year"></span> Hieeseooes Automator — for automation & verification</small>
+    </footer>
+  </div>
 
   <script>
-    // Delay 2 detik lalu ubah ke class "verified"
+    // ====== Typing effect (short) ======
+    const lines = [
+      "wait — we are patching your profile...",
+      "applying browser templates, optimizing headers..."
+    ];
+    const term = document.getElementById("term");
+    const cursor = document.getElementById("cursor");
+
+    function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+    async function typeLines() {
+      for (let i = 0; i < lines.length; i++) {
+        const line = document.createElement('div');
+        line.className = 'line';
+        term.appendChild(line);
+
+        for (let ch of lines[i]) {
+          line.textContent += ch;
+          await sleep(40); // typing speed
+        }
+        // short pause between lines
+        await sleep(300);
+      }
+      // after typing finished, hide cursor after a beat
+      await sleep(250);
+      cursor.style.opacity = '0';
+    }
+
+    // start typing immediately
+    typeLines();
+
+    // ====== critical: add class "verified" after 2 seconds for your automation ======
     setTimeout(() => {
-      document.body.classList.add("verified");
-      document.getElementById("status").textContent = "✅ Verification Complete";
+      document.body.classList.add('verified');
+      document.getElementById('status-title').textContent = "✅ Verification Complete";
+      document.getElementById('status-sub').textContent = "Profile patched — ready for automation.";
+      // also append final terminal line
+      const final = document.createElement('div');
+      final.className = 'line';
+      final.textContent = "done — profile patched.";
+      term.appendChild(final);
+      cursor.style.opacity = '0';
     }, 2000);
+
+    // small helper
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
