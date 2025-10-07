@@ -2,91 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hieeseooes Automator — Verification</title>
-  <meta name="description" content="Verification page for Hieeseooes Automator.">
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Browser verification by Hieeseooes Automator.">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="wrap">
-    <header class="hero">
-      <div class="brand">
-        <div class="badge">HIEESEOOES</div>
-        <h1>AUTOMATOR</h1>
-      </div>
-      <p class="tag">automation • verification • sale</p>
+  <div class="wrapper">
+    <header class="header">
+      <div class="logo">Hieeseooes Automator</div>
     </header>
 
-    <main id="container" aria-live="polite">
-      <section class="card terminal">
-        <div class="term-window">
-          <div class="term-lines" id="term"></div>
-          <div class="cursor" id="cursor">▌</div>
+    <main class="main-content">
+      <section class="terminal-container">
+        <div class="terminal">
+          <div class="lines" id="term-lines"></div>
+          <div class="cursor" id="term-cursor">█</div>
         </div>
       </section>
-
-      <section class="card status">
+      <section class="status-panel">
         <h2 id="status-title">Verifying browser...</h2>
-        <p id="status-sub">This page will change a verification flag for automated checks.</p>
+        <p id="status-sub">Please wait a moment</p>
         <div class="links">
-          <a href="https://github.com/hieeseooes" target="_blank" rel="noopener">Github</a>
+          <a href="https://github.com/hieeseooes" target="_blank" rel="noopener">GitHub</a>
           <a href="https://www.facebook.com/nanang00m" target="_blank" rel="noopener">Facebook</a>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <small>© <span id="year"></span> Hieeseooes Automator — for automation & verification</small>
+      &copy; <span id="cur-year"></span> Hieeseooes Automator — Automation & Verification
     </footer>
   </div>
 
   <script>
-    // ====== Typing effect (short) ======
-    const lines = [
-      "wait — we are patching your profile...",
-      "applying browser templates, optimizing headers..."
-    ];
-    const term = document.getElementById("term");
-    const cursor = document.getElementById("cursor");
-
-    function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
-
-    async function typeLines() {
-      for (let i = 0; i < lines.length; i++) {
-        const line = document.createElement('div');
-        line.className = 'line';
-        term.appendChild(line);
-
-        for (let ch of lines[i]) {
-          line.textContent += ch;
-          await sleep(40); // typing speed
-        }
-        // short pause between lines
-        await sleep(300);
-      }
-      // after typing finished, hide cursor after a beat
-      await sleep(250);
-      cursor.style.opacity = '0';
+    // helper
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    // start typing immediately
-    typeLines();
+    async function typeEffect(lines, container, cursorEl) {
+      for (let i = 0; i < lines.length; i++) {
+        const lineEl = document.createElement("div");
+        lineEl.className = "line";
+        container.appendChild(lineEl);
 
-    // ====== critical: add class "verified" after 2 seconds for your automation ======
+        for (let ch of lines[i]) {
+          lineEl.textContent += ch;
+          await sleep(50);
+        }
+        await sleep(300);
+      }
+      // small pause, then hide cursor
+      await sleep(200);
+      cursorEl.style.opacity = "0";
+    }
+
+    // lines to type
+    const lines = [
+      "wait — we are patching your profile...",
+      "optimizing settings and applying updates..."
+    ];
+
+    const termContainer = document.getElementById("term-lines");
+    const cursorEl = document.getElementById("term-cursor");
+
+    // start typing
+    typeEffect(lines, termContainer, cursorEl);
+
+    // after 2s, mark verified
     setTimeout(() => {
-      document.body.classList.add('verified');
-      document.getElementById('status-title').textContent = "✅ Verification Complete";
-      document.getElementById('status-sub').textContent = "Profile patched — ready for automation.";
-      // also append final terminal line
-      const final = document.createElement('div');
-      final.className = 'line';
-      final.textContent = "done — profile patched.";
-      term.appendChild(final);
-      cursor.style.opacity = '0';
+      document.body.classList.add("verified");
+      document.getElementById("status-title").textContent = "✅ Verification Complete";
+      document.getElementById("status-sub").textContent = "Profile patched. Ready for automation.";
+      // final terminal line
+      const finalLine = document.createElement("div");
+      finalLine.className = "line";
+      finalLine.textContent = "done — patch applied.";
+      termContainer.appendChild(finalLine);
+      cursorEl.style.opacity = "0";
     }, 2000);
 
-    // small helper
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // set year
+    document.getElementById("cur-year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
